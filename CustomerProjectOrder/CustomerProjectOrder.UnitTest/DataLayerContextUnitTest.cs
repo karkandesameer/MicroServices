@@ -83,11 +83,11 @@ namespace CustomerProjectOrder.UnitTest
             string projectName = "INTE";
             SetMockDataForCustomerProjectOrderHeaders();
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
-
-            mocks.Stub(x => x.GetData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode)))
+            string filter = $"{PROJECTNAME_FIELD} {LIKE_OPERATOR} '%{projectName}%'";
+            mocks.Stub(x => x.SearchData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode), filter))
                 .IgnoreArguments()
                 .Return(_customerProjectOrderHeaders);
-
+            
             var datalayer = new DataLayerContext(_configReader, mocks);
             var result = datalayer.GetProjectByName(_companyCode, projectName);
             Assert.IsNotNull(result);
@@ -101,9 +101,10 @@ namespace CustomerProjectOrder.UnitTest
         {
             string account = "PL001";
             SetMockDataForCustomerProjectOrderHeaders();
+            string filter = $"{CUSTOMER_ACCOUNT_NUMBER}='{account}'";
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
-            mocks.Stub(x => x.GetData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode)))
+            mocks.Stub(x => x.SearchData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode),filter))
                 .IgnoreArguments()
                 .Return(_customerProjectOrderHeaders);
 
@@ -120,9 +121,10 @@ namespace CustomerProjectOrder.UnitTest
         {
             string customerPONo = "TH618000199004";
             SetMockDataForCustomerProjectOrderHeaders();
+            string filter = $"{CUSTOMER_PO_NUMBER}='{customerPONo}'";
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
-            mocks.Stub(x => x.GetData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode)))
+            mocks.Stub(x => x.SearchData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode),filter))
                 .IgnoreArguments()
                 .Return(_customerProjectOrderHeaders);
 
@@ -140,9 +142,10 @@ namespace CustomerProjectOrder.UnitTest
             string startDate = "2010-12-14";
             string endDate = "2011-02-28";
             SetMockDataForCustomerProjectOrderHeaders();
+            string filter = $"{PROJECTSTART_FIELD}>='{startDate}' AND {PROJECTEND_FIELD}<='{endDate}'";
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
-            mocks.Stub(x => x.GetData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode)))
+            mocks.Stub(x => x.SearchData<CustomerProjectOrderHeader>(_configReader.GetDenodoViewUri(_companyCode),filter))
                 .IgnoreArguments()
                 .Return(_customerProjectOrderHeaders);
 
