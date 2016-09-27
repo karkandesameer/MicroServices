@@ -5,3 +5,4 @@ C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.xml
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.LoadTest\obj\Debug\CustomerProjectOrder.LoadTest.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.LoadTest\obj\Debug\CustomerProjectOrder.LoadTest.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.LoadTest\obj\Debug\CustomerProjectOrder.LoadTest.csprojResolveAssemblyReference.cache

@@ -2,3 +2,4 @@ C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayerInterface\bin\Debug\CustomerProjectOrder.DataLayerInterface.pdb
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayerInterface\obj\Debug\CustomerProjectOrder.DataLayerInterface.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayerInterface\obj\Debug\CustomerProjectOrder.DataLayerInterface.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayerInterface\obj\Debug\CustomerProjectOrder.DataLayerInterface.csprojResolveAssemblyReference.cache
