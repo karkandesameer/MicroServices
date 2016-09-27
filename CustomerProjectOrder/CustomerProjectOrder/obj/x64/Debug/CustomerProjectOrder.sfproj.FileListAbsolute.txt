@@ -1,1 +1,2 @@
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder\obj\x64\Debug\CustomerProjectOrder.sfprojResolveAssemblyReference.cache
+C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder\obj\x64\Debug\CustomerProjectOrder.sfprojResolveAssemblyReference.cache
