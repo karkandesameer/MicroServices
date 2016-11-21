@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CustomerProjectOrder.DataLayer.Entities;
+﻿using System.Collections.Generic;
+using CustomerProjectOrder.DataLayer.Entities.Datalake;
 
 namespace CustomerProjectOrder.DataLayer.Interfaces
 {
     public interface IDataLayerContext
     {
-        CustomerProjectOrderHeader GetProjectByNumber(string companyCode, string projectNumber);
-        List<CustomerProjectOrderHeader> GetProjectByCompanyCode(string companyCode);
-        List<CustomerProjectOrderHeader> GetProjectByName(string companyCode, string projectName);
-        List<CustomerProjectOrderHeader> GetProjectByDuration(string companyCode, string startDate, string endDate);
-        CustomerProjectOrderHeader GetProjectByCustomerPONo(string companyCode, string customerPONo);
-        CustomerProjectOrderHeader GetProjectByAccount(string companyCode, string account);
+        Pr01 GetProjectByNumber(string companyCode, string projectNumber);
+        IEnumerable<Pr01> GetProjectByCompanyCode(string companyCode);
+        IEnumerable<Pr01> GetProjectByName(string companyCode, string projectName);
+        IEnumerable<Pr01> GetProjectByDuration(string companyCode, string startDate, string endDate);
+        Pr01 GetProjectByCustomerPONo(string companyCode, string customerPONo);
+        IEnumerable<Pr01> GetProjectByAccount(string companyCode, string account);
     }
 }

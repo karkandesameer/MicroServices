@@ -14,7 +14,6 @@ namespace CustomerProjectOrder.BusinessLayer
    public class CustomerProjectOrderManager: ICustomerProjectOrderManager
     {
         private readonly IDataLayerContext _dataLayerContext;
-        private const string dateFormat = "yyyy-MM-dd";
 
         public CustomerProjectOrderManager(IDataLayerContext dataLayerContext)
         {
@@ -32,13 +31,12 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode Status: Success");
 
                 // Get Item from Master
-                try
-                {
+               
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByNumber(companyCode, projectNumber);
                     if (customerProjectOrderHeader != null)
                     {
-                            response.CustomerProjectOrder =
-                            Converter.ConvertToCustomerProjectOrderModel(customerProjectOrderHeader, companyCode);      
+                        response.CustomerProjectOrder =
+                        Converter.ConvertToCustomerProjectOrderModel(customerProjectOrderHeader, companyCode);
                     }
                     else
                     {
@@ -47,20 +45,10 @@ namespace CustomerProjectOrder.BusinessLayer
                     }
 
                     return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
-                return response;
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and ProductCode Status: Failed");
             return response;
-            
         }
 
         public CustomerProjectOrdersResponse GetProjectByName(string companyCode, string projectName)
@@ -75,8 +63,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProjectName Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByName(companyCode, projectName);
                     if (customerProjectOrderHeader.Any())
                     {
@@ -87,16 +73,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 
@@ -111,14 +87,12 @@ namespace CustomerProjectOrder.BusinessLayer
             var response = new CustomerProjectOrdersResponse();
             response.CustomerProjectOrders = new List<CustomerProjectOrderModel>();
             if (!InputValidation.ValidateCompanyCode(companyCode, response) &&
-                !InputValidation.ValidateDuration(startDate, endDate,response))
-               
+                !InputValidation.ValidateDuration(startDate, endDate, response))
+
             {
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and StartDate and EndDate Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByDuration(companyCode, startDate, endDate);
                     if (customerProjectOrderHeader.Any())
                     {
@@ -129,16 +103,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 
@@ -157,8 +121,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and CustomerPoNo Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByCustomerPONo(companyCode, customerPONo);
                     if (customerProjectOrderHeader != null)
                     {
@@ -170,16 +132,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 
@@ -188,24 +140,22 @@ namespace CustomerProjectOrder.BusinessLayer
 
         }
 
-        public CustomerProjectOrderResponse GetProjectByAccount(string companyCode, string account)
+        public CustomerProjectOrdersResponse GetProjectByAccount(string companyCode, string account)
         {
             ApplicationLogger.InfoLogger(
                  $"Business Method Name: GetProjectByAccount :: Custome Input: companyCode: [{companyCode}] And Account: [{account}]");
-            var response = new CustomerProjectOrderResponse();
+            var response = new CustomerProjectOrdersResponse();
             if (!InputValidation.ValidateCompanyCode(companyCode, response) &&
                 !InputValidation.ValidateAccount(account, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and Account Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByAccount(companyCode, account);
                     if (customerProjectOrderHeader != null)
                     {
-                        response.CustomerProjectOrder =
-                        Converter.ConvertToCustomerProjectOrderModel(customerProjectOrderHeader, companyCode);
+                        response.CustomerProjectOrders =
+                        Converter.ConvertToCustomerProjectOrderModels(customerProjectOrderHeader, companyCode);
                     }
                     else
                     {
@@ -214,15 +164,6 @@ namespace CustomerProjectOrder.BusinessLayer
                     }
 
                     return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
-                return response;
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and Account Status: Failed");
@@ -241,8 +182,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and StartDate and EndDate Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByCompanyCode(companyCode);
                     if (customerProjectOrderHeader.Any())
                     {
@@ -253,16 +192,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 

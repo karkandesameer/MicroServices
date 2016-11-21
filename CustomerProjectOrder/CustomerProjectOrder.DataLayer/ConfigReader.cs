@@ -1,26 +1,32 @@
-﻿using System.Configuration;
+﻿using CustomerProjectOrder.Common;
+using System.Collections.Generic;
+using System.Configuration;
 using Configuration = CustomerProjectOrder.Common.Configuration;
 
 namespace CustomerProjectOrder.DataLayer
 {
     public class ConfigReader
     {
-        private readonly bool _readFromDatabase;
-        private const string BASEURI_KEY = "BaseUri";
-        private const string DENODO_USERNAME_KEY = "DenodoUsername";
-        private const string DENODO_PASSWORD_KEY = "DenodoPassword";
-        private const string CustomerProjectOrder_VIEWURI_KEY = "CustomerProjectOrderViewUri";
+        private bool _readFromDatabase;
         private string ServiceName { get; }
         private string Environment { get; }
         public string ConfigurationDbConnectionString { get; set; }
-        public string BaseUri { get; set; }
-        public string DenodoUsername { get; private set; }
-        public string DenodoPassword { get; private set; }
+        public string DatalakeConnectionString { get; private set; }
+        public string DatasourceLibraryPath { get; private set; }
+
+        public bool ReadFromDatabase
+        {
+            get { return _readFromDatabase; }
+
+            set { _readFromDatabase = value; }
+        }
+
         public ConfigReader()
         {
-            _readFromDatabase = bool.Parse(ReadConfig("ReadConfigFromDatabase"));
-            ServiceName = ReadConfig("ServiceName");
-            Environment = ReadConfig("Environment");
+            _readFromDatabase = bool.Parse(ReadConfig(Constants.READ_CONFIG_FROM_DATABASE));
+            ServiceName = ReadConfig(Constants.ServiceNameKey);
+            Environment = ReadConfig(Constants.EnvironmentKey);
+            DatasourceLibraryPath = ReadConfig(Constants.DATASOURCE_LIBRARY_PATH_KEY);
 
             if (_readFromDatabase)
                 InitializeFromDatabase();
@@ -33,28 +39,30 @@ namespace CustomerProjectOrder.DataLayer
         }
         private void InitializeFromConfig()
         {
-            BaseUri = ReadConfig(BASEURI_KEY);
-            DenodoUsername = ReadConfig(DENODO_USERNAME_KEY);
-            DenodoPassword = ReadConfig(DENODO_PASSWORD_KEY);
+            DatalakeConnectionString = ReadConfig(Constants.DATABASE_CONNECTIONSTRING_KEY);
         }
         private void InitializeFromDatabase()
         {
-            string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
+            string configurationDbConnectionString = ReadConfig(Constants.CONFIGURATION_DB_CONNECTIONSTRING_KEY);
             var configuration = new Configuration(configurationDbConnectionString);
             var configurationDictionary = configuration.GetConfiguration(ServiceName, Environment);
-            BaseUri = configurationDictionary[BASEURI_KEY];
-            DenodoUsername = configurationDictionary[DENODO_USERNAME_KEY];
-            DenodoPassword = configurationDictionary[DENODO_PASSWORD_KEY];
+            DatalakeConnectionString = configurationDictionary[Constants.DATABASE_CONNECTIONSTRING_KEY];
         }
 
-        public string GetDenodoViewUri(string companyCode)
+        public Dictionary<string, string> GetDatabaseDetails(string companyCode,string parentCompanyCode)
         {
             if (!_readFromDatabase)
-                return ReadConfig($"{CustomerProjectOrder_VIEWURI_KEY}_{companyCode.ToLower()}");
-
-            string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
+            {
+                var dicTableName = new Dictionary<string, string>();
+                dicTableName.Add(Constants.DATABASE_TABLE_NAME_KEY, ReadConfig($"{Constants.DATABASE_TABLE_NAME_KEY}_{companyCode.ToLower()}"));
+                dicTableName.Add(Constants.DATABASE_COLUMN_NAME_KEY, ReadConfig($"{Constants.DATABASE_COLUMN_NAME_KEY}_{companyCode.ToLower()}"));
+                return dicTableName;
+            }
+            string configurationDbConnectionString = ReadConfig(Constants.CONFIGURATION_DB_CONNECTIONSTRING_KEY);
             var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDenodoViewUri(ServiceName, Environment, companyCode, CustomerProjectOrder_VIEWURI_KEY);
+            return configuration.GetDatabaseTableName(ServiceName, Environment, companyCode,parentCompanyCode);
         }
+
+
     }
 }

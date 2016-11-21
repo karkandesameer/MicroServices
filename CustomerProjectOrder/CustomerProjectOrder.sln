@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerProjectOrder.Common
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerProjectOrder.DataLayer", "CustomerProjectOrder.DataLayer\CustomerProjectOrder.DataLayer.csproj", "{463FB56A-F918-4B01-848B-90FFBAD93CD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerProjectOrder.DataLayerInterface", "CustomerProjectOrder.DataLayerInterface\CustomerProjectOrder.DataLayerInterface.csproj", "{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerProjectOrder.Model", "CustomerProjectOrder.Model\CustomerProjectOrder.Model.csproj", "{43963BA7-DFD6-445B-A69C-0DCD80BF4F30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerProjectOrder.LoadTest", "CustomerProjectOrder.LoadTest\CustomerProjectOrder.LoadTest.csproj", "{4446732E-06D9-4611-952E-F3053DF23737}"
@@ -75,14 +73,6 @@ Global
 		{463FB56A-F918-4B01-848B-90FFBAD93CD8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{463FB56A-F918-4B01-848B-90FFBAD93CD8}.Release|x64.ActiveCfg = Release|Any CPU
 		{463FB56A-F918-4B01-848B-90FFBAD93CD8}.Release|x64.Build.0 = Release|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Debug|x64.Build.0 = Debug|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Release|x64.ActiveCfg = Release|Any CPU
-		{BDED2BE0-5CB7-4C93-ACAD-4A6E0046C6B5}.Release|x64.Build.0 = Release|Any CPU
 		{43963BA7-DFD6-445B-A69C-0DCD80BF4F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43963BA7-DFD6-445B-A69C-0DCD80BF4F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43963BA7-DFD6-445B-A69C-0DCD80BF4F30}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -111,10 +101,13 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45
+	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccTeamFoundationServer = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = CustomerProjectOrder.API\\CustomerProjectOrder.API.csproj
 		SccProjectName1 = CustomerProjectOrder.API
@@ -128,20 +121,17 @@ Global
 		SccProjectUniqueName4 = CustomerProjectOrder.DataLayer\\CustomerProjectOrder.DataLayer.csproj
 		SccProjectName4 = CustomerProjectOrder.DataLayer
 		SccLocalPath4 = CustomerProjectOrder.DataLayer
-		SccProjectUniqueName5 = CustomerProjectOrder.DataLayerInterface\\CustomerProjectOrder.DataLayerInterface.csproj
-		SccProjectName5 = CustomerProjectOrder.DataLayerInterface
-		SccLocalPath5 = CustomerProjectOrder.DataLayerInterface
-		SccProjectUniqueName6 = CustomerProjectOrder.LoadTest\\CustomerProjectOrder.LoadTest.csproj
-		SccProjectName6 = CustomerProjectOrder.LoadTest
-		SccLocalPath6 = CustomerProjectOrder.LoadTest
-		SccProjectUniqueName7 = CustomerProjectOrder.Model\\CustomerProjectOrder.Model.csproj
-		SccProjectName7 = CustomerProjectOrder.Model
-		SccLocalPath7 = CustomerProjectOrder.Model
-		SccProjectUniqueName8 = CustomerProjectOrder.UnitTest\\CustomerProjectOrder.UnitTest.csproj
-		SccProjectName8 = CustomerProjectOrder.UnitTest
-		SccLocalPath8 = CustomerProjectOrder.UnitTest
-		SccProjectUniqueName9 = CustomerProjectOrder\\CustomerProjectOrder.sfproj
-		SccProjectName9 = CustomerProjectOrder
-		SccLocalPath9 = CustomerProjectOrder
+		SccProjectUniqueName5 = CustomerProjectOrder.LoadTest\\CustomerProjectOrder.LoadTest.csproj
+		SccProjectName5 = CustomerProjectOrder.LoadTest
+		SccLocalPath5 = CustomerProjectOrder.LoadTest
+		SccProjectUniqueName6 = CustomerProjectOrder.Model\\CustomerProjectOrder.Model.csproj
+		SccProjectName6 = CustomerProjectOrder.Model
+		SccLocalPath6 = CustomerProjectOrder.Model
+		SccProjectUniqueName7 = CustomerProjectOrder.UnitTest\\CustomerProjectOrder.UnitTest.csproj
+		SccProjectName7 = CustomerProjectOrder.UnitTest
+		SccLocalPath7 = CustomerProjectOrder.UnitTest
+		SccProjectUniqueName8 = CustomerProjectOrder\\CustomerProjectOrder.sfproj
+		SccProjectName8 = CustomerProjectOrder
+		SccLocalPath8 = CustomerProjectOrder
 	EndGlobalSection
 EndGlobal

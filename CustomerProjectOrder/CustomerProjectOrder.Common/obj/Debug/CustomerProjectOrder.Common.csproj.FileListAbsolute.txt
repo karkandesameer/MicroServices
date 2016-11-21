@@ -1,14 +1,11 @@
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\CustomerProjectOrder.Common.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\CustomerProjectOrder.Common.pdb
-C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\NLog.dll
-C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\NLog.xml
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\obj\Debug\CustomerProjectOrder.Common.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\obj\Debug\CustomerProjectOrder.Common.pdb
-C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\obj\Debug\CustomerProjectOrder.Common.csprojResolveAssemblyReference.cache
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\CustomerProjectOrder.Common.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\CustomerProjectOrder.Common.pdb
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\NLog.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\NLog.xml
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\obj\Debug\CustomerProjectOrder.Common.csprojResolveAssemblyReference.cache
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\obj\Debug\CustomerProjectOrder.Common.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.Common\obj\Debug\CustomerProjectOrder.Common.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Newtonsoft.Json.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml

@@ -1,11 +1,7 @@
 ﻿using CustomerProjectOrder.Common;
 using CustomerProjectOrder.Common.Error;
 using CustomerProjectOrder.Model.Response;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerProjectOrder.BusinessLayer
 {
@@ -86,7 +82,7 @@ namespace CustomerProjectOrder.BusinessLayer
         /// <summary>
         /// This method is used to validate Customer Po Number
         /// </summary>
-        /// <param name="customerPoNo"></param>
+        /// <param name="customerPONo"></param>
         /// <param name="response"></param>
         /// <returns></returns>
         public static bool ValidateCustomerPONo(string customerPONo, BaseResponse response)

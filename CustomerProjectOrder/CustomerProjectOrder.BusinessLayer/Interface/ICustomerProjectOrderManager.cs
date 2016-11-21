@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CustomerProjectOrder.Model.Response;
+﻿using CustomerProjectOrder.Model.Response;
 
 namespace CustomerProjectOrder.BusinessLayer.Interface
 {
@@ -14,7 +9,7 @@ namespace CustomerProjectOrder.BusinessLayer.Interface
         CustomerProjectOrdersResponse GetProjectByName(string companyCode, string projectName);
         CustomerProjectOrdersResponse GetProjectByDuration(string companyCode, string startDate ,string endDate);
         CustomerProjectOrderResponse GetProjectByCustomerPONo(string companyCode, string customerPONo);
-        CustomerProjectOrderResponse GetProjectByAccount(string companyCode, string account);
+        CustomerProjectOrdersResponse GetProjectByAccount(string companyCode, string account);
 
     }
 }

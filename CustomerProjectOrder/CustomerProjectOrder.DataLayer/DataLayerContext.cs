@@ -2,161 +2,126 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using CustomerProjectOrder.Common.Logger;
-using CustomerProjectOrder.DataLayer.Entities;
-using DenodoAdapter;
+using CustomerProjectOrder.DataLayer.Entities.Datalake;
 using CustomerProjectOrder.DataLayer.Interfaces;
 using System.Linq;
+using Microservices.Common.Interface;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using CustomerProjectOrder.Common;
 
 namespace CustomerProjectOrder.DataLayer
 {
 
-    public interface ITest
-    { string DomainUri { get; set; } }
-    public class DataLayerContext : IDataLayerContext, ITest
+    public class DataLayerContext : IDataLayerContext
     {
 
-        private const string LIKE_OPERATOR = "like";
-        private const string PROJECTNUMBER_FIELD = "pr01001";
-        private const string PROJECTNAME_FIELD = "pr01009";
-        private const string PROJECTSTART_FIELD = "pr01067";
-        private const string PROJECTEND_FIELD = "pr01069";
-        private const string CUSTOMER_PO_NUMBER = "pr01106";
-        private const string CUSTOMER_ACCOUNT_NUMBER = "pr01003";
-        private const string COMPANYCODE_PLACEHOLDER = "{CompanyCode}";
-        private readonly string _denodoUrl;
-        private readonly IDenodoContext _denodoContext;
+        private const string EqualOperator = "=";
+        private const string LessThanEqualOperator = "<=";
+        private const string GreaterThanEqualOperator = ">=";
+        private const string AndOperator = "AND";
+        private const string LikeOperator = "like";
+        private const string ProjectnumberField = "pr01001";
+        private const string ProjectnameField = "pr01009";
+        private const string ProjectstartField = "pr01067";
+        private const string ProjectendField = "pr01069";
+        private const string CustomerPoNumber = "pr01106";
+        private const string CustomerAccountNumber = "pr01003";
+        private const string ToDate = "TO_DATE";
         private readonly ConfigReader _configReader;
+        private readonly string parentCompanyCode="";
+
+        //....added to direct connection
+        [Import]
+        public IDatabase Database { get; set; }
 
         public DataLayerContext()
         {
-            try
-            {
-                _configReader = new ConfigReader();
-                _denodoContext = new DenodoContext(_configReader.BaseUri, _configReader.DenodoUsername,
-                    _configReader.DenodoPassword);
-                _denodoUrl = _configReader.BaseUri;
-            }
-            catch (Exception exception)
-            {
-                ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace,
-                    exception.InnerException);
-                throw;
-            }
+            _configReader = new ConfigReader();
+            GetContainer();
+            Database.ConnectionString = _configReader.DatalakeConnectionString;
         }
 
-        public DataLayerContext(ConfigReader configReader, IDenodoContext denodoContext)
+        /// <summary>
+        /// This method initialise the Import interface object with matchs of export with same type.
+        /// here it initialise to IDatabase object.
+        /// </summary>
+        private void GetContainer()
         {
-            _configReader = configReader;
-            _denodoContext = denodoContext;
-            _denodoUrl = _configReader.BaseUri;
+            DirectoryCatalog catalog = new DirectoryCatalog(_configReader.DatasourceLibraryPath);
+            CompositionContainer container = new CompositionContainer(catalog);
+            container.ComposeParts(this);
         }
 
-        public string DomainUri { get; set; }
-
-        public CustomerProjectOrderHeader GetProjectByAccount(string companyCode, string account)
+        public IEnumerable<Pr01> GetProjectByAccount(string companyCode, string account)
         {
-            try
-            {
-                string companyViewUri = _denodoUrl + _configReader.GetDenodoViewUri(companyCode);
-                string filter = $"{CUSTOMER_ACCOUNT_NUMBER}='{account}'";
-                ApplicationLogger.InfoLogger($"DataLayer :: GetOrderByName :: Getting Order by name [{CUSTOMER_ACCOUNT_NUMBER}] with company code [{companyCode}] from denodo url: {companyViewUri} with filter: {filter}");
-                var lstOfCustomerProjectOrderHeader = _denodoContext.SearchData<CustomerProjectOrderHeader>(companyViewUri, filter);
-                ApplicationLogger.InfoLogger($"Orders count: {lstOfCustomerProjectOrderHeader.Count}");
-                return lstOfCustomerProjectOrderHeader.FirstOrDefault();
-            }
-            catch (Exception exception)
-            {
-                LogException(exception);
-                throw;
-            }
+            ApplicationLogger.InfoLogger("DataLayer :: GetProjectByAccount : Reading datalake table name from config");
+
+            var databaseDetails = _configReader.GetDatabaseDetails(companyCode,parentCompanyCode); ;
+            string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
+            string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+            ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
+            var lstOfPr01 = Database.Where<Pr01>(tableName,columns, $"trim(lower({CustomerAccountNumber})){EqualOperator}'{account.ToLower().Trim()}'");
+            ApplicationLogger.InfoLogger($"Orders count: {lstOfPr01.Count()}");
+            return lstOfPr01;
         }
 
-        public CustomerProjectOrderHeader GetProjectByCustomerPONo(string companyCode, string customerPONo)
+        public Pr01 GetProjectByCustomerPONo(string companyCode, string customerPONo)
         {
-            try
-            {
-                string companyViewUri = _denodoUrl+ _configReader.GetDenodoViewUri(companyCode);
-                string filter = $"{CUSTOMER_PO_NUMBER}='{customerPONo}'";
-                ApplicationLogger.InfoLogger($"DataLayer :: GetOrderByName :: Getting Order by name [{customerPONo}] with company code [{companyCode}] from denodo url: {companyViewUri} with filter: {filter}");
-                var lstOfCustomerProjectOrderHeader = _denodoContext.SearchData<CustomerProjectOrderHeader>(companyViewUri, filter);
-                ApplicationLogger.InfoLogger($"Orders count: {lstOfCustomerProjectOrderHeader.Count}");
-                return lstOfCustomerProjectOrderHeader.FirstOrDefault();
-            }
-            catch (Exception exception)
-            {
-                LogException(exception);
-                throw;
-            }
+            ApplicationLogger.InfoLogger("DataLayer :: GetProjectByCustomerPONo : Reading datalake table name from config");
+            var databaseDetails = _configReader.GetDatabaseDetails(companyCode, parentCompanyCode); ;
+            string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
+            string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+            ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
+            var pr01 = Database.Where<Pr01>(tableName, columns, $"trim(lower({CustomerPoNumber})){EqualOperator}'{customerPONo.ToLower().Trim()}'");
+            return pr01.FirstOrDefault();
         }
 
-        public List<CustomerProjectOrderHeader> GetProjectByDuration(string companyCode, string startDate, string endDate)
+        public IEnumerable<Pr01> GetProjectByDuration(string companyCode, string startDate, string endDate)
         {
-            try
-            {
-                string companyViewUri = _denodoUrl+ _configReader.GetDenodoViewUri(companyCode);
-                string filter = $"{PROJECTSTART_FIELD}>='{startDate}' AND {PROJECTEND_FIELD}<='{endDate}'";
-                ApplicationLogger.InfoLogger($"DataLayer :: GetOrderByName :: Getting Order by start date [{startDate}] and end date[{endDate}] with company code [{companyCode}] from denodo url: {companyViewUri} with filter: {filter}");
-                var lstOfCustomerProjectOrderHeader = _denodoContext.SearchData<CustomerProjectOrderHeader>(companyViewUri, filter);
-                ApplicationLogger.InfoLogger($"Orders count: {lstOfCustomerProjectOrderHeader.Count}");
-                return lstOfCustomerProjectOrderHeader;
-            }
-            catch (Exception exception)
-            {
-                LogException(exception);
-                throw;
-            }
+            ApplicationLogger.InfoLogger("DataLayer :: GetProjectByDuration : Reading datalake table name from config");
+            var databaseDetails = _configReader.GetDatabaseDetails(companyCode, parentCompanyCode); ;
+            string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
+            string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+            ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
+            var lstOfPr01 = Database.Where<Pr01>(tableName,columns, $"{ToDate}({ProjectstartField}){GreaterThanEqualOperator} '{startDate.ToLower().Trim()}' {AndOperator} {ToDate}({ProjectendField}){LessThanEqualOperator} '{endDate.ToLower().Trim()}'");
+            ApplicationLogger.InfoLogger($"Orders count: {lstOfPr01.Count()}");
+            return lstOfPr01;
         }
 
-        public List<CustomerProjectOrderHeader> GetProjectByName(string companyCode, string projectName)
+        public IEnumerable<Pr01> GetProjectByName(string companyCode, string projectName)
         {
-            try
-            {
-                string companyViewUri = _denodoUrl+ _configReader.GetDenodoViewUri(companyCode);
-                string filter = $"{PROJECTNAME_FIELD} {LIKE_OPERATOR} '%{projectName}%'";
-                ApplicationLogger.InfoLogger($"DataLayer :: GetOrderByName :: Getting Order by name [{projectName}] with company code [{companyCode}] from denodo url: {companyViewUri} with filter: {filter}");
-                var lstOfCustomerProjectOrderHeader = _denodoContext.SearchData<CustomerProjectOrderHeader>(companyViewUri, filter);
-                ApplicationLogger.InfoLogger($"Orders count: {lstOfCustomerProjectOrderHeader.Count}");
-                return lstOfCustomerProjectOrderHeader;
-            }
-            catch (Exception exception)
-            {
-                LogException(exception);
-                throw;
-            }
+            ApplicationLogger.InfoLogger("DataLayer :: GetProjectByName : Reading datalake table name from config");
+            var databaseDetails = _configReader.GetDatabaseDetails(companyCode, parentCompanyCode); ;
+            string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
+            string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+            ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
+            var lstOfPr01 = Database.Where<Pr01>(tableName,columns, $"trim(lower({ProjectnameField})){LikeOperator}'%{projectName.ToLower().Trim()}%'");
+            ApplicationLogger.InfoLogger($"Orders count: {lstOfPr01.Count()}");
+            return lstOfPr01;
         }
 
-        public CustomerProjectOrderHeader GetProjectByNumber(string companyCode, string projectNumber)
+        public Pr01 GetProjectByNumber(string companyCode, string projectNumber)
         {
-            try
-            {
-                string companyViewUri = _denodoUrl+ _configReader.GetDenodoViewUri(companyCode);
-                string filter = $"{PROJECTNUMBER_FIELD}='{projectNumber}'";
-                ApplicationLogger.InfoLogger($"DataLayer :: GetOrderByName :: Getting Order by name [{projectNumber}] with company code [{companyCode}] from denodo url: {companyViewUri} with filter: {filter}");
-                var customerProjectOrderHeader = _denodoContext.SearchData<CustomerProjectOrderHeader>(companyViewUri, filter);
-                return customerProjectOrderHeader.FirstOrDefault();
-            }
-            catch (Exception exception)
-            {
-                LogException(exception);
-                throw;
-            }
+            ApplicationLogger.InfoLogger("DataLayer :: GetProjectByCustomerPONo : Reading datalake table name from config");
+            var databaseDetails = _configReader.GetDatabaseDetails(companyCode, parentCompanyCode); ;
+            string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
+            string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+            ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
+            var pr01 = Database.Where<Pr01>(tableName,columns, $"trim(lower({ProjectnumberField})){EqualOperator}'{projectNumber.ToLower().Trim()}'");
+            return pr01.FirstOrDefault();
         }
 
-        public List<CustomerProjectOrderHeader> GetProjectByCompanyCode(string companyCode)
+        public IEnumerable<Pr01> GetProjectByCompanyCode(string companyCode)
         {
-            try
-            {
-                string companyViewUri = _denodoUrl + _configReader.GetDenodoViewUri(companyCode);
-                ApplicationLogger.InfoLogger($"DataLayer :: GetOrderByName :: Getting Order by  company code [{companyCode}] from denodo url: {companyViewUri}");
-                var lstOfCustomerProjectOrderHeader = _denodoContext.GetData<CustomerProjectOrderHeader>(companyViewUri);
-                ApplicationLogger.InfoLogger($"Orders count: {lstOfCustomerProjectOrderHeader.Count}");
-                return lstOfCustomerProjectOrderHeader;
-            }
-            catch (Exception exception)
-            {
-                LogException(exception);
-                throw;
-            }
+            ApplicationLogger.InfoLogger("DataLayer :: GetProjectByCompanyCode : Reading datalake table name from config");
+            var databaseDetails = _configReader.GetDatabaseDetails(companyCode, parentCompanyCode); ;
+            string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
+            string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+            ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
+            var lstOfPr01 = Database.Get<Pr01>(tableName,columns);
+            ApplicationLogger.InfoLogger($"Orders count: {lstOfPr01.Count()}");
+            return lstOfPr01;
         }
 
         private static void LogException(Exception exception)

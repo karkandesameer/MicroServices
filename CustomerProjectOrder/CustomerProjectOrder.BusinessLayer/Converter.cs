@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using CustomerProjectOrder.Model;
-using CustomerProjectOrder.DataLayer.Entities;
+using CustomerProjectOrder.DataLayer.Entities.Datalake;
 
 namespace CustomerProjectOrder.BusinessLayer
 {
@@ -27,7 +25,7 @@ namespace CustomerProjectOrder.BusinessLayer
         /// <param name="companyCode"></param>
         /// <returns></returns>
         public static List<CustomerProjectOrderModel> ConvertToCustomerProjectOrderModels(
-            List<CustomerProjectOrderHeader> customerProjectOrderHeaders, string companyCode)
+            IEnumerable<Pr01> customerProjectOrderHeaders, string companyCode)
         {
             var customerProjectOrderModels = new List<CustomerProjectOrderModel>();
             foreach (var customerProjectHeader in customerProjectOrderHeaders)
@@ -43,25 +41,24 @@ namespace CustomerProjectOrder.BusinessLayer
         /// <param name="customerProjectOrderHeader"></param>
         /// <param name="companyCode"></param>
         /// <returns></returns>
-        public static CustomerProjectOrderModel ConvertToCustomerProjectOrderModel(CustomerProjectOrderHeader customerProjectOrderHeader, string companyCode)
+        public static CustomerProjectOrderModel ConvertToCustomerProjectOrderModel(Pr01 customerProjectOrderHeader, string companyCode)
         {
-            string erpProjectKey = "I" + companyCode + customerProjectOrderHeader.pr01001;
+            string erpProjectKey = "I" + companyCode + customerProjectOrderHeader.Pr01001;
             return new CustomerProjectOrderModel()
             {
-                ERP_Project_Number__c = customerProjectOrderHeader.pr01001,
-                Subject = customerProjectOrderHeader.pr01009,
-                Description = customerProjectOrderHeader.pr01010 + customerProjectOrderHeader.pr01011,
-                ERP_Project_Start_Date__c = customerProjectOrderHeader.pr01067,
-                ERP_Project_End_Date__c = customerProjectOrderHeader.pr01069,
-                Account = customerProjectOrderHeader.pr01003,
-                ERP_Customer_PO_Number__c = customerProjectOrderHeader.pr01106,
+                ERP_Project_Number__c = customerProjectOrderHeader.Pr01001,
+                Subject = customerProjectOrderHeader.Pr01009,
+                Description = customerProjectOrderHeader.Pr01010 + customerProjectOrderHeader.Pr01011,
+                ERP_Project_Start_Date__c = customerProjectOrderHeader.Pr01067,
+                ERP_Project_End_Date__c = customerProjectOrderHeader.Pr01069,
+                Account = customerProjectOrderHeader.Pr01003,
+                ERP_Customer_PO_Number__c = customerProjectOrderHeader.Pr01106,
                 Status = DefaultStatus,
                 Origin = DefaultOrigin,
                 RecordType = DefaultRecordType,
-                ERP_Project_Key__c = erpProjectKey
+                ERP_Project_Key__c = erpProjectKey?.ToUpper()
             };
         }
-
 
         #endregion
     }

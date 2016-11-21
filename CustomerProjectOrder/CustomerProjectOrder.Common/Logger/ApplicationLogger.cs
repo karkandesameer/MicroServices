@@ -5,19 +5,13 @@ namespace CustomerProjectOrder.Common.Logger
 {
     public static class ApplicationLogger
     {
-        private static readonly Logging _logger = new Logging();
-        private static readonly BooleanSwitch _boolSwitch = new BooleanSwitch("BoolSwitch",
+        private static readonly Logging Logger = new Logging();
+        private static readonly BooleanSwitch BoolSwitch = new BooleanSwitch("BoolSwitch",
       "Switch in config file");
-
-        //public static void Debug(string message, Category category, string stackTrace ,string innerException) {
-        //    logger.DebugLog(message, category, stackTrace, innerException);
-        //}
-        //public static void Trace(string message, Category category, string stackTrace, string innerException) {
-        //    logger.TraceLog(message, category,  stackTrace,  innerException);
-        //}
+       
         public static void Errorlog(string message, Category category, string stackTrace, Exception innerException)
         {
-            _logger.Errorlog(message, category, stackTrace, innerException);
+            Logger.Errorlog(message, category, stackTrace, innerException);
         }
 
         /// <summary>
@@ -27,9 +21,9 @@ namespace CustomerProjectOrder.Common.Logger
         /// <param name="input">The input.</param>
         public static void InfoLogger(string input)
         {
-            if (_boolSwitch.Enabled)
+            if (BoolSwitch.Enabled)
             {
-                _logger.InfoLogger(input);
+                Logger.InfoLogger(input);
             }
         }
     }

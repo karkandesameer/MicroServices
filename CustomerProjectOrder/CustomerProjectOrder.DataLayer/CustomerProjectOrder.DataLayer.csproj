@@ -58,11 +58,15 @@
       <HintPath>..\packages\DenodoAdapter.1.0.4.1\lib\net452\DenodoAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microservices.Common">
+      <HintPath>..\..\..\Binref\Microservices.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -86,6 +90,7 @@
       <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -99,7 +104,7 @@
   <ItemGroup>
     <Compile Include="ConfigReader.cs" />
     <Compile Include="DataLayerContext.cs" />
-    <Compile Include="Entities\CustomerProjectOrderHeader.cs" />
+    <Compile Include="Entities\Datalake\Pr01.cs" />
     <Compile Include="Interfaces\IDataLayerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

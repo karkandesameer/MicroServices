@@ -1,0 +1,12 @@
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\CustomerSiteLocation.Model.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\CustomerSiteLocation.Model.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\CustomerSiteLocation.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\Newtonsoft.Json.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\CustomerSiteLocation.Common.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\obj\Debug\CustomerSiteLocation.Model.csprojResolveAssemblyReference.cache
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\obj\Debug\CustomerSiteLocation.Model.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.Model\obj\Debug\CustomerSiteLocation.Model.pdb

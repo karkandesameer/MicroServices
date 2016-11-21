@@ -1,0 +1,17 @@
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.BusinessLayer.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.BusinessLayer.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.DataLayer.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.Model.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\Microservices.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.Common.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.DataLayer.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\CustomerSiteLocation.Model.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\obj\Debug\CustomerSiteLocation.BusinessLayer.csprojResolveAssemblyReference.cache
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\obj\Debug\CustomerSiteLocation.BusinessLayer.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.BusinessLayer\obj\Debug\CustomerSiteLocation.BusinessLayer.pdb

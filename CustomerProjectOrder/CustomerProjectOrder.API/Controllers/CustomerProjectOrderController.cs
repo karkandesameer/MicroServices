@@ -27,10 +27,8 @@ namespace CustomerProjectOrder.API.Controllers
         [Route("companyCode/{companyCode}")]
         public IHttpActionResult GetProjectByCompanyCode(string companyCode)
         {
-
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            try
-            {
+           
                 var response = _customerProjectOrderManager.GetProjectByCompanyCode(companyCode);
 
                 if (response.Status == ResponseStatus.Success)
@@ -41,17 +39,6 @@ namespace CustomerProjectOrder.API.Controllers
 
                 ApplicationLogger.InfoLogger("Response Status: Failuer");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
-            }
-            catch (HttpResponseException exception)
-            {
-                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
-            }
-            catch (Exception ex)
-            {
-                ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
         }
 
 
@@ -59,16 +46,14 @@ namespace CustomerProjectOrder.API.Controllers
         /// Get project base on filter criteria
         /// </summary>
         /// <param name="companyCode"></param>
-        /// <param name="projectCode"></param>
+        /// <param name="projectNumber"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("companyCode/{companyCode}/projectNumber/{projectNumber}")]
+        [Route("companyCode/{companyCode}/projectNumber/{*projectNumber}")]
         public IHttpActionResult GetProjectByNumber(string companyCode, string projectNumber)
         {
-
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            try
-            {
+           
                 var response = _customerProjectOrderManager.GetProjectByNumber(companyCode, projectNumber);
 
                 if (response.Status == ResponseStatus.Success)
@@ -79,17 +64,6 @@ namespace CustomerProjectOrder.API.Controllers
 
                 ApplicationLogger.InfoLogger("Response Status: Failuer");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
-            }
-            catch (HttpResponseException exception)
-            {
-                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
-            }
-            catch (Exception ex)
-            {
-                ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
         }
 
         /// <summary>
@@ -99,12 +73,11 @@ namespace CustomerProjectOrder.API.Controllers
         /// <param name="projectName"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("companyCode/{companyCode}/projectName/{projectName}")]
-        public IHttpActionResult GetProjectByName(string companyCode,string projectName)
+        [Route("companyCode/{companyCode}/projectName/{*projectName}")]
+        public IHttpActionResult GetProjectByName(string companyCode, string projectName)
         {
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            try
-            {
+
                 var response = _customerProjectOrderManager.GetProjectByName(companyCode, projectName);
 
                 if (response.Status == ResponseStatus.Success)
@@ -115,17 +88,6 @@ namespace CustomerProjectOrder.API.Controllers
 
                 ApplicationLogger.InfoLogger("Response Status: Failuer");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
-            }
-            catch (HttpResponseException exception)
-            {
-                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
-            }
-            catch (Exception ex)
-            {
-                ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
         }
 
         /// <summary>
@@ -140,8 +102,7 @@ namespace CustomerProjectOrder.API.Controllers
         public IHttpActionResult GetProjectByDuration(string companyCode, string startDate, string endDate)
         {
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            try
-            {
+
                 var response = _customerProjectOrderManager.GetProjectByDuration(companyCode, startDate, endDate);
 
                 if (response.Status == ResponseStatus.Success)
@@ -152,17 +113,6 @@ namespace CustomerProjectOrder.API.Controllers
 
                 ApplicationLogger.InfoLogger("Response Status: Failuer");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
-            }
-            catch (HttpResponseException exception)
-            {
-                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
-            }
-            catch (Exception ex)
-            {
-                ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
 
         }
 
@@ -173,12 +123,11 @@ namespace CustomerProjectOrder.API.Controllers
         /// <param name="customerPONo"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("companyCode/{companyCode}/customerPONo/{customerPONo}")]
+        [Route("companyCode/{companyCode}/customerPONo/{*customerPONo}")]
         public IHttpActionResult GetProjectByCustomerPONo(string companyCode, string customerPONo)
         {
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            try
-            {
+           
                 var response = _customerProjectOrderManager.GetProjectByCustomerPONo(companyCode, customerPONo);
 
                 if (response.Status == ResponseStatus.Success)
@@ -189,17 +138,7 @@ namespace CustomerProjectOrder.API.Controllers
 
                 ApplicationLogger.InfoLogger("Response Status: Failuer");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
-            }
-            catch (HttpResponseException exception)
-            {
-                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
-            }
-            catch (Exception ex)
-            {
-                ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
+            
         }
 
         /// <summary>
@@ -209,33 +148,20 @@ namespace CustomerProjectOrder.API.Controllers
         /// <param name="account"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("companyCode/{companyCode}/account/{account}")]
+        [Route("companyCode/{companyCode}/account/{*account}")]
         public IHttpActionResult GetProjectByAccount(string companyCode, string account)
         {
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            try
-            {
+          
                 var response = _customerProjectOrderManager.GetProjectByAccount(companyCode, account);
 
                 if (response.Status == ResponseStatus.Success)
                 {
                     ApplicationLogger.InfoLogger($"Response Status: Success :: ItemLegth: 1.");
-                    return Ok(response.CustomerProjectOrder);
+                    return Ok(response.CustomerProjectOrders);
                 }
-
                 ApplicationLogger.InfoLogger("Response Status: Failuer");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
-            }
-            catch (HttpResponseException exception)
-            {
-                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
-            }
-            catch (Exception ex)
-            {
-                ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
 
         }
     }

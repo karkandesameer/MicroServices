@@ -9,36 +9,17 @@ C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.Primitives.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.WebRequest.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Web.Http.dll
-C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\NLog.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Newtonsoft.Json.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\CustomerProjectOrder.Common.pdb
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Rhino.Mocks.xml
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.xml
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.WebRequest.xml
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Web.Http.xml
-C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\NLog.xml
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\obj\Debug\CustomerProjectOrder.DataLayer.csprojResolveAssemblyReference.cache
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\obj\Debug\CustomerProjectOrder.DataLayer.dll
 C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\obj\Debug\CustomerProjectOrder.DataLayer.pdb
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\CustomerProjectOrder.DataLayer.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\CustomerProjectOrder.DataLayer.pdb
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\CustomerProjectOrder.Common.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\DenodoAdapter.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Rhino.Mocks.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.Extensions.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.Formatting.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.Primitives.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.WebRequest.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Web.Http.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\NLog.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Newtonsoft.Json.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\CustomerProjectOrder.Common.pdb
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Rhino.Mocks.xml
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.xml
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Net.Http.WebRequest.xml
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\System.Web.Http.xml
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\NLog.xml
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\obj\Debug\CustomerProjectOrder.DataLayer.csprojResolveAssemblyReference.cache
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\obj\Debug\CustomerProjectOrder.DataLayer.dll
-C:\JCI\Microservices-PublicRepository\Microservices\Microservices\CustomerProjectOrder\CustomerProjectOrder.DataLayer\obj\Debug\CustomerProjectOrder.DataLayer.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Microservices.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerProjectOrder\CustomerProjectOrder.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml

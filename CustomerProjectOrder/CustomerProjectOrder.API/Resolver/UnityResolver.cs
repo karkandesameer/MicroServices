@@ -8,21 +8,21 @@ namespace CustomerProjectOrder.API.Resolver
 
     public class UnityResolver : IDependencyResolver
     {
-        protected readonly IUnityContainer _container;
+        protected readonly IUnityContainer Container;
 
         public UnityResolver(IUnityContainer container)
         {
             if (container == null)
                 throw new ArgumentNullException(nameof(container));
 
-            _container = container;
+            Container = container;
         }
 
         public object GetService(Type serviceType)
         {
             try
             {
-                return _container.Resolve(serviceType);
+                return Container.Resolve(serviceType);
             }
             catch (ResolutionFailedException)
             {
@@ -34,7 +34,7 @@ namespace CustomerProjectOrder.API.Resolver
         {
             try
             {
-                return _container.ResolveAll(serviceType);
+                return Container.ResolveAll(serviceType);
             }
             catch (ResolutionFailedException)
             {
@@ -44,13 +44,13 @@ namespace CustomerProjectOrder.API.Resolver
 
         public IDependencyScope BeginScope()
         {
-            var child = _container.CreateChildContainer();
+            var child = Container.CreateChildContainer();
             return new UnityResolver(child);
         }
 
         public void Dispose()
         {
-            _container.Dispose();
+            Container.Dispose();
         }
     }
 }

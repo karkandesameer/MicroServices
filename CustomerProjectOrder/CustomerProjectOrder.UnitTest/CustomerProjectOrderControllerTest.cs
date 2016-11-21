@@ -5,13 +5,14 @@ using Rhino.Mocks;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CustomerProjectOrder.API.Controllers;
-using CustomerProjectOrder.DataLayer.Entities;
 using CustomerProjectOrder.BusinessLayer.Interface;
 using CustomerProjectOrder.Model;
+using CustomerProjectOrder.API.Filters;
 using CustomerProjectOrder.Common.Error;
 using System.Web.Http.Routing;
 using System.Web.Http.Controllers;
 using System;
+using CustomerProjectOrder.BusinessLayer;
 
 namespace CustomerProjectOrder.UnitTest
 {
@@ -19,11 +20,11 @@ namespace CustomerProjectOrder.UnitTest
     public class CustomerProjectOrderControllerTest
     {
         #region Declarations
-        private ICustomerProjectOrderManager _iCustomerProjectOrderManager;
+        private ICustomerProjectOrderManager _iCustomerProjectOrderManager = null;
         private CustomerProjectOrderController _controller;
-        private const string COMPANY_CODE = "bh";
-        private string startDate = DateTime.Now.ToString() ;
-        private string endDate = DateTime.Now.ToString();
+        private const string CompanyCode = "bh";
+        private readonly string _startDate = DateTime.Now.ToShortDateString();
+        private  readonly string _endDate = DateTime.Now.ToShortDateString();
 
         readonly CustomerProjectOrderModel _customerProjectOrderModel = new CustomerProjectOrderModel();
         readonly List<CustomerProjectOrderModel> _customerProjectOrderList = new List<CustomerProjectOrderModel>();
@@ -31,18 +32,15 @@ namespace CustomerProjectOrder.UnitTest
 
         #endregion
 
-
         [TestInitialize]
         public void Initialize()
         {
             _controller = new CustomerProjectOrderController(_iCustomerProjectOrderManager) { Request = new HttpRequestMessage() };
             _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            _controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:51083/?param1=someValue&param2=anotherValue");
+            _controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:51083/Companycode/test?param1=someValue&param2=anotherValue");
         }
 
-
         #region Unit Test Methods
-
         /// <summary>
         /// Unit Test Method for Get all project of Company
         /// </summary>
@@ -52,7 +50,7 @@ namespace CustomerProjectOrder.UnitTest
             var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
             var data = new Model.Response.CustomerProjectOrdersResponse { CustomerProjectOrders = _customerProjectOrderList };
-            mockRepository.Stub(x => x.GetProjectByCompanyCode(COMPANY_CODE))
+            mockRepository.Stub(x => x.GetProjectByCompanyCode(CompanyCode))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -64,7 +62,7 @@ namespace CustomerProjectOrder.UnitTest
             };
 
 
-            var result = _controller.GetProjectByCompanyCode(COMPANY_CODE);
+            var result = _controller.GetProjectByCompanyCode(CompanyCode);
             Assert.IsNotNull(result);
         }
 
@@ -82,14 +80,14 @@ namespace CustomerProjectOrder.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProjectByCompanyCode(COMPANY_CODE))
+            mockRepository.Stub(x => x.GetProjectByCompanyCode(CompanyCode))
                             .IgnoreArguments()
                             .Return(data);
 
             _controller = new CustomerProjectOrderController(mockRepository);
             MockControllerRequest();
 
-            var result = _controller.GetProjectByCompanyCode(COMPANY_CODE);
+            var result = _controller.GetProjectByCompanyCode(CompanyCode);
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
@@ -102,7 +100,24 @@ namespace CustomerProjectOrder.UnitTest
             };
 
 
-            result = _controller.GetProjectByCompanyCode(COMPANY_CODE);
+            result = _controller.GetProjectByCompanyCode(CompanyCode);
+        }
+
+        [TestMethod]
+        public void GetProjectByCompanyCodeTestHttpResponseException()
+        {
+            SetMockDataForCustomerProjectModelModels();
+
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
+
+            mockRepository.Stub(x => x.GetProjectByCompanyCode(CompanyCode))
+                            .IgnoreArguments()
+                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+
+            _controller = new CustomerProjectOrderController(mockRepository);
+            MockControllerRequest();
+
+            var result = _controller.GetProjectByCompanyCode(CompanyCode);
             Assert.IsNotNull(result);
         }
 
@@ -115,7 +130,7 @@ namespace CustomerProjectOrder.UnitTest
             var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
             var data = new Model.Response.CustomerProjectOrderResponse { CustomerProjectOrder = _customerProjectOrderModel };
-            mockRepository.Stub(x => x.GetProjectByNumber(COMPANY_CODE, "000"))
+            mockRepository.Stub(x => x.GetProjectByNumber(CompanyCode, "000"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -127,7 +142,7 @@ namespace CustomerProjectOrder.UnitTest
             };
 
 
-            var result = _controller.GetProjectByNumber(COMPANY_CODE, "123");
+            var result = _controller.GetProjectByNumber(CompanyCode, "123");
             Assert.IsNotNull(result);
         }
 
@@ -145,7 +160,7 @@ namespace CustomerProjectOrder.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProjectByNumber(COMPANY_CODE, "000"))
+            mockRepository.Stub(x => x.GetProjectByNumber(CompanyCode, "000"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -160,9 +175,23 @@ namespace CustomerProjectOrder.UnitTest
                     new HttpRequestMessage(HttpMethod.Get,
                         "http://localhost:51083/?param1=someValue&param2=anotherValue")
             };
+            var result = _controller.GetProjectByNumber(CompanyCode, "12345");
+        }   
 
+        [TestMethod]
+        public void GetProjectByNumberTestHttpResponseException()
+        {
+            SetMockDataForCustomerProjectModelModels();
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
 
-            var result = _controller.GetProjectByNumber(COMPANY_CODE, "12345");
+            mockRepository.Stub(x => x.GetProjectByNumber(CompanyCode, "000"))
+                            .IgnoreArguments()
+                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+
+            _controller = new CustomerProjectOrderController(mockRepository);
+            MockControllerRequest();
+
+            var result = _controller.GetProjectByNumber(CompanyCode, "000");
             Assert.IsNotNull(result);
         }
 
@@ -175,7 +204,7 @@ namespace CustomerProjectOrder.UnitTest
             var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
             var data = new Model.Response.CustomerProjectOrdersResponse { CustomerProjectOrders = _customerProjectOrderList };
-            mockRepository.Stub(x => x.GetProjectByName(COMPANY_CODE,"ABC"))
+            mockRepository.Stub(x => x.GetProjectByName(CompanyCode, "ABC"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -187,7 +216,7 @@ namespace CustomerProjectOrder.UnitTest
             };
 
 
-            var result = _controller.GetProjectByName(COMPANY_CODE, "ABC");
+            var result = _controller.GetProjectByName(CompanyCode, "ABC");
             Assert.IsNotNull(result);
         }
 
@@ -205,7 +234,7 @@ namespace CustomerProjectOrder.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProjectByName(COMPANY_CODE, "ABC"))
+            mockRepository.Stub(x => x.GetProjectByName(CompanyCode, "ABC"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -222,9 +251,29 @@ namespace CustomerProjectOrder.UnitTest
             };
 
 
-            var result = _controller.GetProjectByName(COMPANY_CODE, "ABC");
+            var result = _controller.GetProjectByName(CompanyCode, "ABC");
+        }
+
+        /// <summary>
+        /// Unit Test Method
+        /// </summary>
+        [TestMethod]
+        public void GetProjectByNameTestHttpResponseException()
+        {
+            SetMockDataForCustomerProjectModelModels();
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
+
+            mockRepository.Stub(x => x.GetProjectByName(CompanyCode, "ABC"))
+                            .IgnoreArguments()
+                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+
+            _controller = new CustomerProjectOrderController(mockRepository);
+            MockControllerRequest();
+
+            var result = _controller.GetProjectByName(CompanyCode, "ABC");
             Assert.IsNotNull(result);
         }
+
 
         /// <summary>
         /// Unit Test Method
@@ -232,12 +281,11 @@ namespace CustomerProjectOrder.UnitTest
         [TestMethod]
         public void GetProjectByDurationTest()
         {
-            
-        var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
             var data = new Model.Response.CustomerProjectOrdersResponse { CustomerProjectOrders = _customerProjectOrderList };
-            
-            mockRepository.Stub(x => x.GetProjectByDuration(COMPANY_CODE, startDate, endDate))
+
+            mockRepository.Stub(x => x.GetProjectByDuration(CompanyCode, _startDate, _endDate))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -248,8 +296,7 @@ namespace CustomerProjectOrder.UnitTest
                         "http://localhost:51083/?param1=someValue&param2=anotherValue")
             };
 
-
-            var result = _controller.GetProjectByDuration(COMPANY_CODE, startDate, endDate);
+            var result = _controller.GetProjectByDuration(CompanyCode, _startDate, _endDate);
             Assert.IsNotNull(result);
         }
 
@@ -268,7 +315,7 @@ namespace CustomerProjectOrder.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProjectByDuration(COMPANY_CODE, startDate, endDate))
+            mockRepository.Stub(x => x.GetProjectByDuration(CompanyCode, _startDate, _endDate))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -284,8 +331,26 @@ namespace CustomerProjectOrder.UnitTest
                         "http://localhost:51083/?param1=someValue&param2=anotherValue")
             };
 
+            var result = _controller.GetProjectByDuration(CompanyCode, _startDate, _endDate);
+        }
 
-            var result = _controller.GetProjectByDuration(COMPANY_CODE, startDate, endDate);
+        /// <summary>
+        /// Unit Test Method
+        /// </summary>
+        [TestMethod]
+        public void GetProjectByDurationTestHttpResponseException()
+        {
+            SetMockDataForCustomerProjectModelModels();
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
+
+            mockRepository.Stub(x => x.GetProjectByDuration(CompanyCode, _startDate, _endDate))
+                            .IgnoreArguments()
+                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+
+            _controller = new CustomerProjectOrderController(mockRepository);
+            MockControllerRequest();
+
+            var result = _controller.GetProjectByDuration(CompanyCode, _startDate, _endDate);
             Assert.IsNotNull(result);
         }
 
@@ -298,7 +363,7 @@ namespace CustomerProjectOrder.UnitTest
             var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
             var data = new Model.Response.CustomerProjectOrderResponse { CustomerProjectOrder = _customerProjectOrderModel };
-            mockRepository.Stub(x => x.GetProjectByCustomerPONo(COMPANY_CODE, "000"))
+            mockRepository.Stub(x => x.GetProjectByCustomerPONo(CompanyCode, "000"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -309,8 +374,7 @@ namespace CustomerProjectOrder.UnitTest
                         "http://localhost:51083/?param1=someValue&param2=anotherValue")
             };
 
-
-            var result = _controller.GetProjectByCustomerPONo(COMPANY_CODE, "123");
+            var result = _controller.GetProjectByCustomerPONo(CompanyCode, "123");
             Assert.IsNotNull(result);
         }
 
@@ -328,7 +392,7 @@ namespace CustomerProjectOrder.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProjectByCustomerPONo(COMPANY_CODE, "000"))
+            mockRepository.Stub(x => x.GetProjectByCustomerPONo(CompanyCode, "000"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -345,7 +409,26 @@ namespace CustomerProjectOrder.UnitTest
             };
 
 
-            var result = _controller.GetProjectByCustomerPONo(COMPANY_CODE, "12345");
+            var result = _controller.GetProjectByCustomerPONo(CompanyCode, "12345");
+        }
+
+        /// <summary>
+        /// Unit Test Method
+        /// </summary>
+        [TestMethod]
+        public void GetProjectByCustomerPONoTestHttpResponseException()
+        {
+            SetMockDataForCustomerProjectModelModels();
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
+
+            mockRepository.Stub(x => x.GetProjectByCustomerPONo(CompanyCode, "000"))
+                            .IgnoreArguments()
+                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+
+            _controller = new CustomerProjectOrderController(mockRepository);
+            MockControllerRequest();
+
+            var result = _controller.GetProjectByCustomerPONo(CompanyCode, "000");
             Assert.IsNotNull(result);
         }
 
@@ -357,8 +440,8 @@ namespace CustomerProjectOrder.UnitTest
         {
             var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
-            var data = new Model.Response.CustomerProjectOrderResponse { CustomerProjectOrder = _customerProjectOrderModel };
-            mockRepository.Stub(x => x.GetProjectByAccount(COMPANY_CODE, "000"))
+            var data = new Model.Response.CustomerProjectOrdersResponse { CustomerProjectOrders = _customerProjectOrderList };
+            mockRepository.Stub(x => x.GetProjectByAccount(CompanyCode, "000"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -369,8 +452,7 @@ namespace CustomerProjectOrder.UnitTest
                         "http://localhost:51083/?param1=someValue&param2=anotherValue")
             };
 
-
-            var result = _controller.GetProjectByAccount(COMPANY_CODE, "123");
+            var result = _controller.GetProjectByAccount(CompanyCode, "123");
             Assert.IsNotNull(result);
         }
 
@@ -383,12 +465,12 @@ namespace CustomerProjectOrder.UnitTest
         {
             var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
             SetMockDataForCustomerProjectModelModels();
-            var data = new Model.Response.CustomerProjectOrderResponse { CustomerProjectOrder = _customerProjectOrderModel };
+            var data = new Model.Response.CustomerProjectOrdersResponse { CustomerProjectOrders = _customerProjectOrderList };
 
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProjectByAccount(COMPANY_CODE, "000"))
+            mockRepository.Stub(x => x.GetProjectByAccount(CompanyCode, "000"))
                             .IgnoreArguments()
                             .Return(data);
 
@@ -404,12 +486,41 @@ namespace CustomerProjectOrder.UnitTest
                         "http://localhost:51083/?param1=someValue&param2=anotherValue")
             };
 
+            var result = _controller.GetProjectByAccount(CompanyCode, "12345");
+        }
 
-            var result = _controller.GetProjectByAccount(COMPANY_CODE, "12345");
+        /// <summary>
+        /// Unit Test Method
+        /// </summary>
+        [TestMethod]
+        public void GetProjectByAccountTestHttpResponseException()
+        {
+            SetMockDataForCustomerProjectModelModels();
+            var mockRepository = MockRepository.GenerateMock<ICustomerProjectOrderManager>();
+
+            mockRepository.Stub(x => x.GetProjectByAccount(CompanyCode, "000"))
+                            .IgnoreArguments()
+                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+
+            _controller = new CustomerProjectOrderController(mockRepository);
+            MockControllerRequest();
+
+            var result = _controller.GetProjectByAccount(CompanyCode, "000");
             Assert.IsNotNull(result);
         }
 
         #endregion
+
+        [TestMethod]
+        public void ValidationFilterTest()
+        {
+
+            Type t = typeof(CustomerProjectOrderController);
+            ValidationFilter obj = new ValidationFilter();
+            MockControllerRequest();
+            obj.OnActionExecuting(_controller.ActionContext); ;
+            Assert.IsTrue(t.GetCustomAttributes(typeof(ValidationFilter), true).Length>0);
+        }
 
         #region MockData Methods
 
@@ -443,7 +554,7 @@ namespace CustomerProjectOrder.UnitTest
                 Status = "Working",
                 Origin = "Integrated",
                 RecordType = "Projects",
-                ERP_Project_Key__c="I"+ COMPANY_CODE+ "M100030010"
+                ERP_Project_Key__c="I"+ CompanyCode+ "M100030010"
 
             });
             _customerProjectOrderList.Add(new CustomerProjectOrderModel()
@@ -458,7 +569,7 @@ namespace CustomerProjectOrder.UnitTest
                 Status = "Working",
                 Origin = "Integrated",
                 RecordType = "Projects",
-                ERP_Project_Key__c = "I" + COMPANY_CODE + "M100030010"
+                ERP_Project_Key__c = "I" + CompanyCode + "M100030010"
             });
             _customerProjectOrderList.Add(new CustomerProjectOrderModel()
             {
@@ -472,7 +583,7 @@ namespace CustomerProjectOrder.UnitTest
                 Status = "Working",
                 Origin = "Integrated",
                 RecordType = "Projects",
-                ERP_Project_Key__c = "I" + COMPANY_CODE + "M100030010"
+                ERP_Project_Key__c = "I" + CompanyCode + "M100030010"
             });
             #endregion
         }

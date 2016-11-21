@@ -1,0 +1,7 @@
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\bin\Debug\WebTest1.webtest
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\bin\Debug\CustomerSiteLocation.LoadTest.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\bin\Debug\CustomerSiteLocation.LoadTest.pdb
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.xml
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\obj\Debug\CustomerSiteLocation.LoadTest.dll
+C:\JCI\Microservices-TFSRepository\Microservices\SourceControl\src\Team Spartans\CustomerSiteLocation\CustomerSiteLocation.LoadTest\obj\Debug\CustomerSiteLocation.LoadTest.pdb
